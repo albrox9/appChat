@@ -1,9 +1,28 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'src/app.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-import 'src/App.dart';
+void main() async {
 
-void main() {
+  WidgetsFlutterBinding.ensureInitialized();
 
-  runApp(App()); //puerta de entrada a la clase que construyamos
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  FirebaseAuth.instance
+      .authStateChanges()
+      .listen((User? user) {
+    if (user == null) {
+      print('User is currently signed out!');
+    } else {
+      print('User is signed in!');
+    }
+  });
+
+  runApp(const App()); //puerta de entrada a la clase que construyamos
+
 }
 
