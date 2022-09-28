@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "778289123816",
+    "project_id": "hola-flutter-25ff2",
+    "storage_bucket": "hola-flutter-25ff2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:778289123816:android:88a9ef1e4ccd4ab728145d",
+        "android_client_info": {
+          "package_name": "com.example.hola_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "778289123816-n7v16b7u3fnh1gc8pgsrvj2d6kqk55tm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuEiWZnx3cS0SMnHapBXOqSWqoRfisYdc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "778289123816-n7v16b7u3fnh1gc8pgsrvj2d6kqk55tm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "778289123816-v6u9ok90a3l9bg1ugvr1u1lii79t86tj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.holaFlutter"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
