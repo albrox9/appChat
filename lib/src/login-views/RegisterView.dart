@@ -4,7 +4,9 @@ import 'package:hola_flutter/src/custom_views/RFInputText.dart';
 
 class RegisterView extends StatelessWidget {
 
-  const RegisterView({Key? key}) : super(key: key);
+  RegisterView({Key? key}) : super(key: key);
+
+  var txt = TextEditingController();
 
   void registerPressed(String emailAddress, String password, BuildContext context) async{
 
@@ -13,7 +15,9 @@ class RegisterView extends StatelessWidget {
         email: emailAddress,
         password: password,
       );
-      Navigator.of(context).popAndPushNamed('/loginview');
+      print("ME HE REGISTRADO");
+      Navigator.popAndPushNamed(context, '/loginview');
+
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
@@ -55,6 +59,8 @@ class RegisterView extends StatelessWidget {
     blIsPasswordInput: true,
     );
 
+    TextField txtMensajes = TextField(controller:txt, readOnly: true, style: TextStyle(
+      color: Colors.red, fontSize: 18));
 
     return Scaffold(
       appBar: AppBar(
@@ -79,6 +85,8 @@ class RegisterView extends StatelessWidget {
                     //Con el if, controlamos que se repita la misma contraseña.
                     if(inputPass.getText() == inputPassRep.getText()){
                       registerPressed(inputUser.getText(), inputPass.getText(), context);
+                    } else {
+                      txt.text="ERROR CONTRASEÑA NO COINCIDE";
                     }
                   },
                   child: const Text("ACEPTAR"),
@@ -92,6 +100,7 @@ class RegisterView extends StatelessWidget {
                 )
               ],
             ),
+            txtMensajes,
           ],
         ),
       ),

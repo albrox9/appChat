@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'src/app.dart';
+import 'src/App.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
@@ -12,7 +12,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  FirebaseAuth.instance
+  /*FirebaseAuth.instance
       .authStateChanges()
       .listen((User? user) {
     if (user == null) {
@@ -20,7 +20,7 @@ void main() async {
     } else {
       print('User is signed in!');
     }
-  });
+  });*/
 
   runApp(const App()); //puerta de entrada a la clase que construyamos
 

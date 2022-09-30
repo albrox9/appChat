@@ -13,7 +13,8 @@ class LoginView extends StatelessWidget {
           email: emailAddress,
           password: password
       );
-     //Navigator.of(context).popAndPushNamed('/home');
+     Navigator.of(context).popAndPushNamed('/home');
+
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
@@ -21,7 +22,7 @@ class LoginView extends StatelessWidget {
         print('Wrong password provided for that user.');
       }
     }
-    print("ME HE LOGUEADO");
+    print("ME HE LOGUEADO LOGIN VIEW");
   }
 
   @override

@@ -30,8 +30,9 @@ class _LoginPhoneViewState extends State<LoginPhoneView>{
 
       verificationCompleted: (PhoneAuthCredential credential) async {
        await FirebaseAuth.instance.signInWithCredential(credential);
-        //Navigator.popAndPushNamed(context, '/home');
        print("Me he logueado");
+        //Navigator.popAndPushNamed(context, '/home');
+
       },
 
       verificationFailed: (FirebaseAuthException e) {
