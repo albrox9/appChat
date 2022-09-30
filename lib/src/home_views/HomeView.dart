@@ -1,62 +1,66 @@
-
-
-//import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class HomeView extends StatefulWidget {
-
-  const HomeView({super.key});
-
+class HomeView extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
+
     return _HomeViewState();
   }
 }
 
 class _HomeViewState extends State<HomeView>{
 
-  /*FirebaseFirestore db = FirebaseFirestore.instance; //db, es database. Crea un objeto Firebase.
+  FirebaseFirestore db = FirebaseFirestore.instance;
+  String sNombre="AQUI IRA EL NOMBRE";
 
-    void initState(){
-      super.initState();
-      getprofile();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getProfile();
+  }
 
-    }
+  void getProfile() async{
+    final docRef = db.collection("perfiles").doc(FirebaseAuth.instance.currentUser?.uid);
 
-    void getprofile() async{
-      //Acceder a los datos del perfil del firebase.
-      //esto devuelve todas las filas. Select *
-      //Queremos uno concreto.
-      await db.collection("perfiles").doc("A4xLAZazX3Otxcx40FJoXKul6Dk2").get().then(
-              (DocumentSnapshot doc) {
-          final data = doc.data() as Map <String, dynamic>;
-          print("------------->>>>>>>>>>" + data.toString());
+    await docRef.get().then(
+          (DocumentSnapshot doc) {
+        final data = doc.data() as Map<String, dynamic>;
+        print("--------->>>>>>>>>>>>>>>>  "+data?['name']);
 
+        setState(() {
+          sNombre=data?['name'];
+        });
+        // ...
       },
-        onError: (e) => print("Error getting document: $e"),
-      );
+      onError: (e) => print("Error getting document: $e"),
+    );
 
-    }*/
+
+
+  }
+
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('HOME'),
+        title: Text('Chatdar'),
       ),
-      backgroundColor: Colors.tealAccent,
+      //backgroundColor: Colors.orangeAccent,
       body: Center(
-      child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-            Text("Home view"),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("HOME VIEW BIENVENIDO: "+sNombre)
           ],
         ),
       ),
     );
   }
+
 }
-
-
-
