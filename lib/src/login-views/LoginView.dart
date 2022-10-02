@@ -6,22 +6,29 @@ class LoginView extends StatelessWidget {
 
   const LoginView({Key? key}) : super(key:key);
 
-  void loginPressed(String emailAddress, String password, BuildContext context) async{
+  void logIn(String emailAddress, String password, BuildContext context) async{
 
     try {
-      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: emailAddress,
-          password: password
+
+      final credential =
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
+                email: emailAddress,
+                password: password
       );
+
+
      Navigator.of(context).popAndPushNamed('/home');
 
     } on FirebaseAuthException catch (e) {
+
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
+
       } else if (e.code == 'wrong-password') {
         print('Wrong password provided for that user.');
       }
     }
+
     print("ME HE LOGUEADO LOGIN VIEW");
   }
 
@@ -62,7 +69,7 @@ class LoginView extends StatelessWidget {
                 OutlinedButton(
                   onPressed: () {
                     // Respond to button press
-                   loginPressed(inputUser.getText(), inputPass.getText(),context);
+                   logIn(inputUser.getText(), inputPass.getText(),context);
                   },
                   child: const Text("Login"),
                 ),

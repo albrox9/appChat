@@ -11,19 +11,25 @@ class RegisterView extends StatelessWidget {
   void registerPressed(String emailAddress, String password, BuildContext context) async{
 
     try {
-      final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: emailAddress,
-        password: password,
+
+      final credential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+            email: emailAddress,
+            password: password,
       );
+
       print("ME HE REGISTRADO");
       Navigator.popAndPushNamed(context, '/loginview');
 
     } on FirebaseAuthException catch (e) {
+
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
+
       } else if (e.code == 'email-already-in-use') {
         print('The account already exists for that email.');
       }
+
     } catch (e) {
       print(e);
     }

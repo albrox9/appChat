@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'dart:async';
+import '../custom_usuarios/Users.dart';
 
 class HomeView extends StatefulWidget{
   @override
@@ -10,10 +12,10 @@ class HomeView extends StatefulWidget{
   }
 }
 
-class _HomeViewState extends State<HomeView>{
+class _HomeViewState extends State<HomeView> {
 
   FirebaseFirestore db = FirebaseFirestore.instance;
-  String sNombre="AQUI IRA EL NOMBRE";
+  //late final User user;
 
   @override
   void initState() {
@@ -22,25 +24,29 @@ class _HomeViewState extends State<HomeView>{
     getProfile();
   }
 
-  void getProfile() async{
-    final docRef = db.collection("perfiles").doc(FirebaseAuth.instance.currentUser?.uid);
+    Future <Users?> getProfile() async {
 
-    await docRef.get().then(
-          (DocumentSnapshot doc) {
-        final data = doc.data() as Map<String, dynamic>;
-        print("--------->>>>>>>>>>>>>>>>  "+data?['name']);
-
-        setState(() {
-          sNombre=data?['name'];
-        });
-        // ...
-      },
-      onError: (e) => print("Error getting document: $e"),
+    final docRef =
+      db.collection('perfiles').
+      doc(FirebaseAuth.instance.currentUser?.uid).
+      withConverter(
+      fromFirestore: Users.fromFirestore,
+      toFirestore: (Users usuario, _) => usuario.toFirestore(),
     );
 
+    final docSnapshot = await docRef.get();
 
+    //final usuario = docSnapshot.data();//Paso intermedio. Investigar el data.
 
+    if (docSnapshot.data() != null) {
+
+      return docSnapshot.data();
+
+    } throw {
+      print("No encuentro documento"),
+    };
   }
+
 
 
   @override
@@ -53,14 +59,29 @@ class _HomeViewState extends State<HomeView>{
       ),
       //backgroundColor: Colors.orangeAccent,
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text("HOME VIEW BIENVENIDO: "+sNombre)
-          ],
-        ),
-      ),
-    );
-  }
+        child: FutureBuilder<Users?>(
+          future: getProfile(),
+          builder: (BuildContext context,AsyncSnapshot snapshot) {
 
+            if(snapshot.connectionState == ConnectionState.waiting){
+              return const Center(
+                child:
+                CircularProgressIndicator(),
+              );
+            }
+            return Center(
+              child: Column(
+                children: [
+                  Text('${snapshot.data?.name}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.indigoAccent )),
+                  Text('${snapshot.data?.age}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.indigoAccent )),
+                  Text('${snapshot.data?.city}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.indigoAccent )),
+                  Text('${snapshot.data?.country}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.indigoAccent )),
+                ],
+              )
+                );
+              },
+            ),
+          )
+        );
+  }
 }
