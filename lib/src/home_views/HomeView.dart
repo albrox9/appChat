@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-import '../custom_usuarios/Users.dart';
+import '../fb_objects/Perfil.dart';
 
 class HomeView extends StatefulWidget{
   @override
@@ -24,14 +24,14 @@ class _HomeViewState extends State<HomeView> {
     getProfile();
   }
 
-    Future <Users?> getProfile() async {
+    Future <Perfil?> getProfile() async {
 
     final docRef =
       db.collection('perfiles').
       doc(FirebaseAuth.instance.currentUser?.uid).
-      withConverter(
-      fromFirestore: Users.fromFirestore,
-      toFirestore: (Users usuario, _) => usuario.toFirestore(),
+      withConverter( //esto se descarga con un conversor, que lo transforma
+      fromFirestore: Perfil.fromFirestore, //lo transforma en un Perfil.
+      toFirestore: (Perfil perfil, _) => perfil.toFirestore(),
     );
 
     final docSnapshot = await docRef.get();
@@ -59,7 +59,7 @@ class _HomeViewState extends State<HomeView> {
       ),
       //backgroundColor: Colors.orangeAccent,
       body: Center(
-        child: FutureBuilder<Users?>(
+        child: FutureBuilder<Perfil?>(
           future: getProfile(),
           builder: (BuildContext context,AsyncSnapshot snapshot) {
 

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hola_flutter/src/home_views/OnBoardingView.dart';
 import 'package:hola_flutter/src/login-views/LoginView.dart';
 import 'package:hola_flutter/src/login-views/RegisterView.dart';
 
@@ -32,12 +33,13 @@ class App extends StatelessWidget {
 
     return MaterialApp( //Es una plantilla.
       title: "Flutter Chat",
-      initialRoute: '/loginview',
+      initialRoute: '/onboarding',
       routes: {
         '/home': (context)=> HomeView(),
         '/loginphoneview': (context) => const LoginPhoneView(),
         '/loginview': (context) => const LoginView(),
         '/registerview': (context) => RegisterView(),
+        '/onboarding':(context) => OnBoardingView(),
 
       }
     );
