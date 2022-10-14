@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Perfil {
-  final String? name;
-  final String? city;
-  final String? country;
-  final int? age;
+   final String? name;
+   final String? city;
+   final String? country;
+   final int? age;
 
 
   Perfil({

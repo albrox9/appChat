@@ -70,6 +70,7 @@ class LoginView extends StatelessWidget {
                   onPressed: () {
                     // Respond to button press
                    logIn(inputUser.getText(), inputPass.getText(),context);
+                   //Navigator.popAndPushNamed(context, '/onboarding');
                   },
                   child: const Text("Login"),
                 ),

@@ -24,7 +24,7 @@ void main() async {
     }
   });*/
 
-  runApp(const App()); //puerta de entrada a la clase que construyamos
+  runApp(App()); //puerta de entrada a la clase que construyamos
 
 }
 

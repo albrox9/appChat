@@ -1,47 +1,32 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:hola_flutter/src/home_views/OnBoardingView.dart';
-import 'package:hola_flutter/src/login-views/LoginView.dart';
-import 'package:hola_flutter/src/login-views/RegisterView.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hola_flutter/src/login-views/SplashView.dart';
 
-import 'home_views/HomeView.dart';
-import 'login-views/LoginPhoneView.dart';
+import 'home_views/HomeView2.dart';
+import 'home_views/OnBoardingView.dart';
+import 'login-views/LoginView.dart';
+import 'login-views/RegisterView.dart';
 
 
-class App extends StatelessWidget {
+class App extends StatelessWidget{
 
-  const App({Key? key}) : super(key: key);
+  App({Key? key}) : super(key:key);
 
-  //En todos los Statelees.
-  //No obligatorio pero recomendable.
-
-  /*String isUserogger(){
-
-    if(FirebaseAuth.instance.currentUser == null){
-      return "/loginview";
-
-    } else{
-
-      return "/home";
-    }
-  }*/
 
   @override
   Widget build(BuildContext context) {
-
-    //FirebaseAuth.instance.currentUser.
-
-    return MaterialApp( //Es una plantilla.
-      title: "Flutter Chat",
-      initialRoute: '/onboarding',
+    return MaterialApp(
+      initialRoute: '/splashview',
       routes: {
-        '/home': (context)=> HomeView(),
-        '/loginphoneview': (context) => const LoginPhoneView(),
-        '/loginview': (context) => const LoginView(),
-        '/registerview': (context) => RegisterView(),
+        '/loginview':(context) => LoginView(),
+        '/registerview':(context) => RegisterView(),
+        '/homeview':(context) => HomeView(),
         '/onboarding':(context) => OnBoardingView(),
-
-      }
+        '/splashview':(context)=> SplashView(),
+      },
     );
   }
+
 }
