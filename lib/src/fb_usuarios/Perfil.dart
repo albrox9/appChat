@@ -1,29 +1,36 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Users {
+class Perfil {
   final String? name;
   final String? city;
   final String? country;
   final int? age;
+  final List<String>? friends;
+  final List<DocumentReference>? rooms;
 
 
-  Users({
-    this.name,
-    this.city,
-    this.country,
-    this.age,
+  Perfil({
+    this.name="",
+    this.city="",
+    this.country="",
+    this.age=0,
+    this.friends = const [],
+    this.rooms = const [],
+
   });
 
-  factory Users.fromFirestore(
+  factory Perfil.fromFirestore(
       DocumentSnapshot<Map<String, dynamic>> snapshot,
       SnapshotOptions? options,
           ) {
         final data = snapshot.data();
-        return Users(
+        return Perfil(
           name: data?['name'],
           city: data?['city'],
           country: data?['country'],
           age: data?['age'],
+          friends: data?['friends'] is Iterable ? List.from(data?['friends']) : null,
+          rooms: data?['rooms'] is Iterable ? List.from(data?['rooms']) : null
         );
       }
 
@@ -33,6 +40,8 @@ class Users {
       if (city != null) "city": city,
       if (country != null) "country": country,
       if (age != null) "age": age,
+      if (friends!.isNotEmpty) "friends": friends,
+      if (rooms!.isNotEmpty) "rooms": rooms,
     };
   }
 }

@@ -17,7 +17,7 @@ class LoginView extends StatelessWidget {
       );
 
 
-     Navigator.of(context).popAndPushNamed('/home');
+     Navigator.of(context).popAndPushNamed('/homeview');
 
     } on FirebaseAuthException catch (e) {
 
@@ -76,8 +76,6 @@ class LoginView extends StatelessWidget {
                 ),
                 OutlinedButton(
                   onPressed: () {
-                    // Respond to button press
-                    //print("REGISTROOOOOOOO");
                     Navigator.popAndPushNamed(context, '/registerview');
                   },
                   child: const Text("Registro"),
