@@ -24,7 +24,7 @@ class ChatItem extends StatelessWidget {
     );*/
 
     return Container(
-      height: 25,
+      height: 100,
       child: Center(child: Text(sTexto)),
     );
 

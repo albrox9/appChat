@@ -72,13 +72,14 @@ class _HomeViewState extends State<HomeView> {
       }
     });
   }
-
+//Esta es la función que le pasaremos a la roomItem
   void listItemShortClicked(int index){
-    print("DEBUG: "+index.toString());
-    print("DEBUG: "+chatRooms[index].name!);
-    DataHolder().selectedChatRoom=chatRooms[index];
-    Navigator.of(context).pushNamed("/ChatView");
+    print("DEBUG: "+index.toString()); //nos saldrá e logcat
+    print("DEBUG: "+chatRooms[index].name!); //imprime el nombre de la room referenciada en el index
+    DataHolder().selectedChatRoom=chatRooms[index];//Recupero la referencia de la Room del data Holder, que se guarda en el perfil.
+    Navigator.of(context).pushNamed("/chatview");//Sin el pop se agrega la pantalla por encima, y puedo volver atrás.
   }
+
 
 
   @override
@@ -91,15 +92,16 @@ class _HomeViewState extends State<HomeView> {
 
       ),
       body: Center(
-      child: ListView.builder(
+      child:
+          ListView.builder(
           padding: const EdgeInsets.all(8),
           itemCount: chatRooms.length,
           itemBuilder: (BuildContext context, int index) {
             return RoomItem(sTitulo: chatRooms[index].name!,
-              onShortClick: listItemShortClicked,index: index,);
-          }
-      ),
-      ),
-    );
+              onShortClick: listItemShortClicked,index: index,);}
+        ),
+
+        )
+      );
   }
 }

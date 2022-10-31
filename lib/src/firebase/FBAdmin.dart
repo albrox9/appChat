@@ -8,11 +8,13 @@ class FBAdmin{
 
   FirebaseFirestore db = FirebaseFirestore.instance;
 
+
   FBAdmin(){
 
   }
 
-  Future<Perfil?> descargarPerfil(String? idPerfil) async {
+  Future <Perfil?> descargarPerfil(String? idPerfil) async {
+
     final docRef = db.collection("perfiles").doc(idPerfil)
         .withConverter(fromFirestore: Perfil.fromFirestore,
       toFirestore: (Perfil perfil, _) => perfil.toFirestore(),
@@ -21,6 +23,8 @@ class FBAdmin{
 
     final docSnap = await docRef.get();
     //DataHolder().perfil=docSnap.data()!;
+
     return docSnap.data();
+
   }
 }

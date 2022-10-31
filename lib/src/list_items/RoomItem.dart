@@ -5,7 +5,7 @@ class RoomItem extends StatelessWidget {
 
   final String sTitulo;
   final Function(int index) onShortClick;
-  final int index;
+  final int index;//esto viene de fuera
 
   const RoomItem({Key? key, this.sTitulo="Titulo", required this.onShortClick,
     required this.index}) : super(key: key);
@@ -18,7 +18,8 @@ class RoomItem extends StatelessWidget {
       subtitle: Text('Secondary text'),
       leading: Icon(Icons.label),
       onTap: () {
-        onShortClick(index);
+        onShortClick(index); //la función que paso por parámetro
+        //se ejecuta aquí.
       },
 
     );

@@ -5,6 +5,7 @@ class Perfil {
   final String? city;
   final String? country;
   final int? age;
+  final String uid;
   final List<String>? friends;
   final List<DocumentReference>? rooms;
 
@@ -14,6 +15,7 @@ class Perfil {
     this.city="",
     this.country="",
     this.age=0,
+    this.uid = "",
     this.friends = const [],
     this.rooms = const [],
 
@@ -29,6 +31,7 @@ class Perfil {
           city: data?['city'],
           country: data?['country'],
           age: data?['age'],
+          uid: snapshot.id,
           friends: data?['friends'] is Iterable ? List.from(data?['friends']) : null,
           rooms: data?['rooms'] is Iterable ? List.from(data?['rooms']) : null
         );

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hola_flutter/src/home_views/ChatView.dart';
 import 'package:hola_flutter/src/login-views/SplashView.dart';
 
 import 'home_views/HomeView.dart';
@@ -18,13 +19,14 @@ class App extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/splashview',
+      initialRoute: '/homeview',
       routes: {
         '/loginview':(context) => LoginView(),
         '/registerview':(context) => RegisterView(),
         '/homeview':(context) => HomeView(),
         '/onboarding':(context) => OnBoardingView(),
         '/splashview':(context)=> SplashView(),
+        '/chatview':(context)=> ChatView(),
       },
     );
   }

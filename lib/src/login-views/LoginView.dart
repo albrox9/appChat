@@ -18,6 +18,7 @@ class LoginView extends StatelessWidget {
 
 
      Navigator.of(context).popAndPushNamed('/homeview');
+     print("ME HE LOGUEADO LOGIN VIEW");
 
     } on FirebaseAuthException catch (e) {
 
@@ -29,7 +30,7 @@ class LoginView extends StatelessWidget {
       }
     }
 
-    print("ME HE LOGUEADO LOGIN VIEW");
+
   }
 
   @override
@@ -76,7 +77,7 @@ class LoginView extends StatelessWidget {
                 ),
                 OutlinedButton(
                   onPressed: () {
-                    Navigator.popAndPushNamed(context, '/registerview');
+                    Navigator.of(context).popAndPushNamed('/registerview');
                   },
                   child: const Text("Registro"),
                 )
