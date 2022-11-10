@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eurekalib/grid_views/RoomCard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hola_flutter/src/fb_usuarios/Room.dart';
+
 import 'package:hola_flutter/src/list_items/RoomItem.dart';
 import 'package:hola_flutter/src/singleton/DataHolder.dart';
 import 'dart:async';
@@ -58,8 +60,10 @@ class _HomeViewState extends State<HomeView> {
 
   void actualizarLista() async{
 
+    //String Query = SELECT * FROM ROOMS WHERE MEMBERS > 100
+    //podemos agregar condiciones las que queramos, splo añadiendolas con comas. También podemos agregar el order by y más cosas.
     final docRef =
-    db.collection('rooms').
+    db.collection('rooms').where("members",isGreaterThan: 100).
     withConverter( //esto se descarga con un conversor, que lo transforma
       fromFirestore: Room.fromFirestore, //lo transforma en un Perfil.
       toFirestore: (Room room, _) => room.toFirestore());
@@ -92,16 +96,28 @@ class _HomeViewState extends State<HomeView> {
 
       ),
       body: Center(
-      child:
-          ListView.builder(
+        child: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3
+          ),
+          itemCount: chatRooms.length,
+          itemBuilder: (BuildContext context, int index){
+            return RoomCard(
+                    sImgURL: chatRooms[index].image!,
+                    sName: chatRooms[index].name!,
+                    onShortClick: listItemShortClicked,
+                    index: index);
+             }
+          /*ListView.builder(
           padding: const EdgeInsets.all(8),
           itemCount: chatRooms.length,
           itemBuilder: (BuildContext context, int index) {
             return RoomItem(sTitulo: chatRooms[index].name!,
               onShortClick: listItemShortClicked,index: index,);}
-        ),
+        ),*/
 
         )
-      );
+      ),
+    );
   }
 }

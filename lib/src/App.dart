@@ -9,6 +9,7 @@ import 'home_views/HomeView.dart';
 import 'home_views/OnBoardingView.dart';
 import 'login-views/LoginView.dart';
 import 'login-views/RegisterView.dart';
+import 'login-views/SVLogoWait.dart';
 
 
 class App extends StatelessWidget{
@@ -19,13 +20,13 @@ class App extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/homeview',
+      initialRoute: '/splashview',
       routes: {
         '/loginview':(context) => LoginView(),
         '/registerview':(context) => RegisterView(),
         '/homeview':(context) => HomeView(),
         '/onboarding':(context) => OnBoardingView(),
-        '/splashview':(context)=> SplashView(),
+        '/splashview':(context)=> SVLogoWait(),
         '/chatview':(context)=> ChatView(),
       },
     );
