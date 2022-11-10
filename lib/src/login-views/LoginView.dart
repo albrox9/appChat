@@ -6,28 +6,32 @@ class LoginView extends StatelessWidget {
 
   const LoginView({Key? key}) : super(key:key);
 
+
   void logIn(String emailAddress, String password, BuildContext context) async{
+
+    await Future.delayed(const Duration(seconds: 1));
+
 
     try {
 
       final credential =
             await FirebaseAuth.instance.signInWithEmailAndPassword(
+
                 email: emailAddress,
                 password: password,
-              //V
       );
 
 
-     Navigator.of(context).popAndPushNamed('/homeview');
-     print("ME HE LOGUEADO LOGIN VIEW");
+      Navigator.of(context).popAndPushNamed('/onboarding');
+
 
     } on FirebaseAuthException catch (e) {
 
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
+        debugPrint('No user found for that email.');
 
       } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
+        debugPrint('Wrong password provided for that user.');
       }
     }
 
@@ -43,14 +47,14 @@ class LoginView extends StatelessWidget {
       iLongitudPalabra:20,
       sHelperText: "Escriba su usuario",
       sTitulo: "Usuario:",
-      icIzquierdo: const Icon(Icons.account_circle_outlined),
+      icIzquierdo: const Icon(Icons.account_circle_outlined, color: Colors.teal,),
     );
 
     RFInputText inputPass = RFInputText(
       iLongitudPalabra:20,
       sHelperText: "Escriba su contrasenia",
       sTitulo: "Contrasenia:",
-      icIzquierdo: const Icon(Icons.password),
+      icIzquierdo: const Icon(Icons.password, color: Colors.teal),
       blIsPasswordInput: true,
     );
 
@@ -74,13 +78,14 @@ class LoginView extends StatelessWidget {
                    logIn(inputUser.getText(), inputPass.getText(),context);
                    //Navigator.popAndPushNamed(context, '/onboarding');
                   },
-                  child: const Text("Login"),
+                  child: const Text("Entrar"),
                 ),
+
                 OutlinedButton(
                   onPressed: () {
                     Navigator.of(context).popAndPushNamed('/registerview');
                   },
-                  child: const Text("Registro"),
+                  child: const Text("Registrarse"),
                 )
               ],
 

@@ -1,17 +1,21 @@
-//El Data holder, no va a tener nada visual.
-//Funciones que permitan realizar funciones asyncronas puras y duras.
+//No visual, only data.
+//Function async .
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
+import '../fb_usuarios/FBText.dart';
 import '../fb_usuarios/Perfil.dart';
 import '../fb_usuarios/Room.dart';
 import '../firebase/FBAdmin.dart';
 
 class DataHolder{
 
-  static final DataHolder _dataHolder = new DataHolder._internal();
+  static final DataHolder _dataHolder = DataHolder._internal();
 
-  String sCOLLECTIONS_ROOMS_NAME = "rooms";
-  String sCOLLECTIONS_TEXTS_NAME = "texts";
+  String sCollectionRoomsName = "rooms";
+  String sCollectionTextName = "texts";
+
 
   String sMensaje= "";
   Perfil perfil = Perfil();
@@ -26,20 +30,13 @@ class DataHolder{
     return _dataHolder;
   }
 
-  Future<void> descargarMiPerfil() async {
 
-    await fbAdmin.descargarPerfil(FirebaseAuth.instance.currentUser?.uid) as Perfil;
 
-  }
 
-  Future<void> descargarPerfilGenerico(String? idPerfil) async{
-    await fbAdmin.descargarPerfil(idPerfil) as Perfil;
-  }
 
-  bool isMiPerfilDownloaded(){
-    perfil = descargarMiPerfil() as Perfil;
-    return perfil != null;
-  }
+
+
+
 
 }
 

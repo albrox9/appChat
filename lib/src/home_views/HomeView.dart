@@ -1,15 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eurekalib/grid_views/RoomCard.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hola_flutter/src/fb_usuarios/Room.dart';
-
-import 'package:hola_flutter/src/list_items/RoomItem.dart';
 import 'package:hola_flutter/src/singleton/DataHolder.dart';
-import 'dart:async';
-import '../fb_usuarios/Perfil.dart';
 
 class HomeView extends StatefulWidget{
+
+  const HomeView({super.key});
+
   @override
   State<StatefulWidget> createState() {
 
@@ -63,7 +61,7 @@ class _HomeViewState extends State<HomeView> {
     //String Query = SELECT * FROM ROOMS WHERE MEMBERS > 100
     //podemos agregar condiciones las que queramos, splo añadiendolas con comas. También podemos agregar el order by y más cosas.
     final docRef =
-    db.collection('rooms').where("members",isGreaterThan: 100).
+    db.collection('rooms').//where("members",isGreaterThan: 100).
     withConverter( //esto se descarga con un conversor, que lo transforma
       fromFirestore: Room.fromFirestore, //lo transforma en un Perfil.
       toFirestore: (Room room, _) => room.toFirestore());
@@ -76,10 +74,10 @@ class _HomeViewState extends State<HomeView> {
       }
     });
   }
-//Esta es la función que le pasaremos a la roomItem
+//Esta es la function que le pasaremos a la roomItem
   void listItemShortClicked(int index){
-    print("DEBUG: "+index.toString()); //nos saldrá e logcat
-    print("DEBUG: "+chatRooms[index].name!); //imprime el nombre de la room referenciada en el index
+    //print("DEBUG: "+index.toString()); //nos saldrá e logcat
+    //print("DEBUG: "+chatRooms[index].name!); //imprime el nombre de la room referenciada en el index
     DataHolder().selectedChatRoom=chatRooms[index];//Recupero la referencia de la Room del data Holder, que se guarda en el perfil.
     Navigator.of(context).pushNamed("/chatview");//Sin el pop se agrega la pantalla por encima, y puedo volver atrás.
   }
@@ -92,7 +90,7 @@ class _HomeViewState extends State<HomeView> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Bienvenido' + DataHolder().perfil.name!),
+        title: Text('Bienvenido${DataHolder().perfil.name!}'),
 
       ),
       body: Center(

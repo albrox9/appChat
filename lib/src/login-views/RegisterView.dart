@@ -18,7 +18,7 @@ class RegisterView extends StatelessWidget {
             password: password,
       );
 
-      print("ME HE REGISTRADO");
+      debugPrint("ME HE REGISTRADO");
       Navigator.popAndPushNamed(context, '/loginview');
 
     } on FirebaseAuthException catch (e) {

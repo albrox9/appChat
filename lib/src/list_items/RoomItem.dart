@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+//ESTA CLASE LA UTILZABAMOS ANTES DE CREAR LA LIBRERIA
 class RoomItem extends StatelessWidget {
 
   final String sTitulo;

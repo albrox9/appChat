@@ -1,15 +1,15 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-
 import '../custom_views/RFInputText.dart';
 import '../fb_usuarios/FBText.dart';
 import '../list_items/ChatItem.dart';
 import '../singleton/DataHolder.dart';
 
 class ChatView extends StatefulWidget{
+
+  const ChatView({super.key});
+
   @override
   State<StatefulWidget> createState() {
 
@@ -18,6 +18,7 @@ class ChatView extends StatefulWidget{
 }
 
 class _ChatViewState extends State<ChatView>{
+
   FirebaseFirestore db = FirebaseFirestore.instance;
   List<FBText> chatTexts = [];
   RFInputText inputMsg=RFInputText(iLongitudPalabra: 200,);
@@ -33,7 +34,7 @@ class _ChatViewState extends State<ChatView>{
 
   void descargarTextos() async{
 
-    String path="${DataHolder().sCOLLECTIONS_ROOMS_NAME}/${DataHolder().selectedChatRoom.uid}/${DataHolder().sCOLLECTIONS_TEXTS_NAME}";
+    String path="${DataHolder().sCollectionRoomsName}/${DataHolder().selectedChatRoom.uid}/${DataHolder().sCollectionTextName}";
 
     final docRef = db.collection(path).
     withConverter(fromFirestore: FBText.fromFirestore,
@@ -48,7 +49,7 @@ class _ChatViewState extends State<ChatView>{
           }
         })
       },
-      onError: (error) => print("Listen failed: $error"),
+      onError: (error) => debugPrint("Listen failed: $error"),
     );
 
 
@@ -66,14 +67,14 @@ class _ChatViewState extends State<ChatView>{
 
   void sendPressed()async {
 
-    String path="${DataHolder().sCOLLECTIONS_ROOMS_NAME}/${DataHolder().selectedChatRoom.uid}/${DataHolder().sCOLLECTIONS_TEXTS_NAME}";
+    String path="${DataHolder().sCollectionRoomsName}/${DataHolder().selectedChatRoom.uid}/${DataHolder().sCollectionTextName}";
 
     final docRef = db.collection(path);
 
-    FBText texto = FBText(text:inputMsg.getText(),
+    FBText text = FBText(text:inputMsg.getText(),
         author: DataHolder().perfil.uid,time: Timestamp.now());
 
-    await docRef.add(texto.toFirestore());
+    await docRef.add(text.toFirestore());
 
     //descargarTextos();
 
@@ -115,7 +116,7 @@ class _ChatViewState extends State<ChatView>{
               inputMsg,
               OutlinedButton(
                 onPressed: sendPressed,
-                child: Text("Send"),
+                child: const Text("Send"),
               )
 
             ],

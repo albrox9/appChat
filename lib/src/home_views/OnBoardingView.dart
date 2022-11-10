@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hola_flutter/src/custom_views/RFInputText.dart';
+import 'package:hola_flutter/src/firebase/FBAdmin.dart';
 
 import '../fb_usuarios/Perfil.dart';
 import '../singleton/DataHolder.dart';
@@ -24,40 +25,19 @@ class _OnBoardingView extends State<OnBoardingView>{
 
   var txt = TextEditingController();
 
-  FirebaseFirestore db = FirebaseFirestore.instance;
+
 
   void initState(){
 
     super.initState();
-    DataHolder().sMensaje="HOLA DESDE ONBOARDING";
-
-    checkExistingProfile();
-
   }
 
-  void checkExistingProfile() async{
 
-    String? idUser=FirebaseAuth.instance.currentUser?.uid;
 
-    final docRef = db.collection("perfiles").doc(idUser);
+  //Hace el insert de los datos del perfil.
+  void btnAceptar(String nombre, String pais, String ciudad, int edad, BuildContext context) async {
 
-    DocumentSnapshot docsnap= await docRef.get();
-
-    if(docsnap.exists){
-      Navigator.of(context).popAndPushNamed("/homeview");
-    }
-    //DataHolder().pruebaFuncion();
-  }
-
-  void btnpress(String nombre, String pais, String ciudad, int edad, BuildContext context) async {
-
-    Perfil perfil = Perfil(name: nombre, country: pais, city: ciudad, age: edad);
-
-    await db.collection("perfiles").doc(FirebaseAuth.instance.currentUser?.uid).
-    set(perfil.toFirestore()).
-    onError((e, _) => print("Error writing document: $e"));
-
-    Navigator.of(context).popAndPushNamed("/homeview");
+    FBAdmin().insertPerfil(nombre, pais, ciudad, edad, context);
 
   }
 
@@ -77,21 +57,21 @@ class _OnBoardingView extends State<OnBoardingView>{
       iLongitudPalabra: 20,
       sHelperText: "Escriba su pais",
       sTitulo: "Pais:",
-      icIzquierdo: const Icon(Icons.password),
+      icIzquierdo: const Icon(Icons.location_city_rounded),
     );
 
     RFInputText inputCiudad = RFInputText(
       iLongitudPalabra: 20,
       sHelperText: "Escriba su ciudad",
       sTitulo: "Ciudad:",
-      icIzquierdo: const Icon(Icons.password),
+      icIzquierdo: const Icon(Icons.location_city),
     );
 
     RFInputText inputEdad = RFInputText(
       iLongitudPalabra: 20,
       sHelperText: "Escriba su edad",
       sTitulo: "Edad:",
-      icIzquierdo: const Icon(Icons.password),
+      icIzquierdo: const Icon(Icons.people),
     );
 
     TextField txtMensajes = TextField(
@@ -100,7 +80,7 @@ class _OnBoardingView extends State<OnBoardingView>{
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('BIENVENIDO'),
+        title: const Text('¡Completa tu perfil!'),
       ),
       backgroundColor: Colors.white,
       body: Center(
@@ -117,7 +97,7 @@ class _OnBoardingView extends State<OnBoardingView>{
               children: [
                 OutlinedButton(
                   onPressed: () {
-                    btnpress (inputNom.getText(), inputPais.getText(),
+                    btnAceptar (inputNom.getText(), inputPais.getText(),
                     inputCiudad.getText(), int.parse(inputEdad.getText()), context);
                     },
                   child: const Text("ACEPTAR"),

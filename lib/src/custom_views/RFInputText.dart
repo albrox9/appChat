@@ -32,23 +32,40 @@ class RFInputText extends StatelessWidget{
   Widget build(BuildContext context) {
     // TODO: implement build
     //throw UnimplementedError();
-    return TextFormField(
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 30,
+        vertical: 15,
+      ),
+
+      child: TextField(
       controller: _controller,
-      cursorColor: Colors.purple,
+      cursorColor: Colors.blueGrey,
+      cursorHeight: 15,
       //initialValue: this.sHelperText,
       maxLength: iLongitudPalabra,
       obscureText: blIsPasswordInput,
-      decoration: InputDecoration(
-        icon: icIzquierdo,
+       style: const TextStyle(fontSize: 15),
+
+        decoration: InputDecoration(
+        contentPadding: const EdgeInsets.all(15.0),
+        prefixIcon: icIzquierdo,
         labelText: sTitulo,
         labelStyle: const TextStyle(
-          color: Color(0xFF6200EE),
+          fontSize: 15,
+          fontWeight: FontWeight.bold,
+          color: Colors.teal,
+        ),
+
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.teal),
         ),
         helperText: sHelperText,
         suffixIcon: icDerecho,
         enabledBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: Color(0xFF6200EE)),
+          borderSide: BorderSide(color: Colors.blueGrey),
         ),
+      ),
       ),
     );
   }

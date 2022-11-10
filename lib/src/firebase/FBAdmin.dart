@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../fb_usuarios/Perfil.dart';
 import '../singleton/DataHolder.dart';
@@ -8,23 +9,32 @@ class FBAdmin{
 
   FirebaseFirestore db = FirebaseFirestore.instance;
 
+  //INSERT DESDE EL ONBOARDING DE LOS DATOS DEL USUARIO RECOGIDOS.
+  void insertPerfil(String nombre, String pais, String ciudad, int edad, BuildContext context) async {
 
-  FBAdmin(){
+    Perfil perfil = Perfil(name: nombre, country: pais, city: ciudad, age: edad);
 
+    await db.collection("perfiles").doc(FirebaseAuth.instance.currentUser?.uid).
+    set(perfil.toFirestore()).
+    onError((e, _) => print("Error writing document: $e"));
+
+    Navigator.of(context).popAndPushNamed("/homeview");
   }
 
-  Future <Perfil?> descargarPerfil(String? idPerfil) async {
+  //DESCARGA DEL PERFIL DE USUARIO EN EL SPLASH VIEW PARA COMPROBAR SI EXISTE PERFIL
+  Future <bool> descargarPerfil() async {
 
-    final docRef = db.collection("perfiles").doc(idPerfil)
+    String? idUser = FirebaseAuth.instance.currentUser?.uid;
+
+    final docRef = db.collection("perfiles").doc(idUser)
         .withConverter(fromFirestore: Perfil.fromFirestore,
-      toFirestore: (Perfil perfil, _) => perfil.toFirestore(),
+        toFirestore: (Perfil perfil, _) => perfil.toFirestore(),
     );
 
-
-    final docSnap = await docRef.get();
-    //DataHolder().perfil=docSnap.data()!;
-
-    return docSnap.data();
+    DocumentSnapshot docsnap = await docRef.get();
+    return docsnap.exists;
 
   }
+
+
 }
