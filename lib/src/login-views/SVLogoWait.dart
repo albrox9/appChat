@@ -18,12 +18,13 @@ class _SVLogoWaitState extends State<SVLogoWait> {
     return Scaffold(
         body: Center(
         child: Column (
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             mainAxisSize: MainAxisSize.max,
-            children:  [
-              Image(image: AssetImage("assets/image/img.png")),
-              Text("CARGANDO APP"),
-              CircularProgressIndicator(),
+            children:  const [
+              Image(image: AssetImage("assets/images/logoP.jpg"), width: 200, height: 500, ),
+              CircularProgressIndicator(
+                color: Colors.black38,
+              ),
             ]
 
         )

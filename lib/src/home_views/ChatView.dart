@@ -41,8 +41,7 @@ class _ChatViewState extends State<ChatView>{
 
 
     docRef.snapshots().listen(
-          (event) => {
-        setState(() {
+          (event) => {setState(() {
           chatTexts.clear();
           for(int i=0;i<event.docs.length;i++){
             chatTexts.add(event.docs[i].data());
@@ -51,6 +50,7 @@ class _ChatViewState extends State<ChatView>{
       },
       onError: (error) => print("Listen failed: $error"),
     );
+
 
     /*
     final docSnap = await docRef.get();
