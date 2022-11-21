@@ -21,6 +21,8 @@ class FBAdmin{
     Navigator.of(context).popAndPushNamed("/homeview");
   }
 
+
+
   //DESCARGA DEL PERFIL DE USUARIO EN EL SPLASH VIEW PARA COMPROBAR SI EXISTE PERFIL
   Future <bool> descargarPerfil() async {
 

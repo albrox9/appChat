@@ -4,8 +4,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hola_flutter/src/custom_views/RFInputText.dart';
-import 'package:hola_flutter/src/firebase/FBAdmin.dart';
 
+
+import '../fb_data/FBAdmin.dart';
 import '../fb_usuarios/Perfil.dart';
 import '../singleton/DataHolder.dart';
 

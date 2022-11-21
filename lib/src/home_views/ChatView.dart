@@ -1,5 +1,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../custom_views/RFInputText.dart';
 import '../fb_usuarios/FBText.dart';
@@ -71,8 +72,9 @@ class _ChatViewState extends State<ChatView>{
 
     final docRef = db.collection(path);
 
+    //no es correcto poner el currentUser pero de momento no sabe hacerlo de otra forma.
     FBText text = FBText(text:inputMsg.getText(),
-        author: DataHolder().perfil.uid,time: Timestamp.now());
+        author: FirebaseAuth.instance.currentUser?.uid,time: Timestamp.now());
 
     await docRef.add(text.toFirestore());
 
@@ -98,14 +100,14 @@ class _ChatViewState extends State<ChatView>{
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Container(
-                color: Colors.amberAccent,
+                color: Colors.amber.shade100,
                 height: 400,
                 child: ListView.separated(
                   padding: const EdgeInsets.all(8),
                   itemCount: chatTexts.length,
                   itemBuilder: (BuildContext context, int index) {
                     return ChatItem(sTexto: chatTexts[index].text!,
-                      onShortClick: listItemShortClicked,index: index,);
+                      onShortClick: listItemShortClicked,index: index, sAuthor: chatTexts[index].author!,);
                   },
                   separatorBuilder: (BuildContext context, int index) {
                     return const Divider();

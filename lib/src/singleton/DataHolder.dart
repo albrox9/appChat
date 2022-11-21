@@ -4,10 +4,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import '../fb_data/FBAdmin.dart';
 import '../fb_usuarios/FBText.dart';
 import '../fb_usuarios/Perfil.dart';
 import '../fb_usuarios/Room.dart';
-import '../firebase/FBAdmin.dart';
+
 
 class DataHolder{
 
