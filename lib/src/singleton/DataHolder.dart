@@ -8,6 +8,7 @@ import '../fb_data/FBAdmin.dart';
 import '../fb_usuarios/FBText.dart';
 import '../fb_usuarios/Perfil.dart';
 import '../fb_usuarios/Room.dart';
+import '../platform/PlatformAdmin.dart';
 
 
 class DataHolder{
@@ -23,8 +24,15 @@ class DataHolder{
   Room selectedChatRoom = Room();//Almaceno la referencia de la Room en el DataHolder, para no perderlo al cambiar de pantalla
   FBAdmin fbAdmin = FBAdmin();
 
+  double dSCREEN_WIDTH =0;
+  double dSCREEN_HEIGHT =0;
+
+  late PlatformAdmin platformAdmin;
+
   DataHolder._internal(){
+
     sMensaje = "Lorem ipsum";
+    platformAdmin = PlatformAdmin();
   }
 
   factory DataHolder(){
