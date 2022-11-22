@@ -31,7 +31,8 @@ class App extends StatelessWidget{
 
       materialAppMobile=MaterialApp(
         theme: ThemeData(
-          primarySwatch: Colors.teal
+          primarySwatch: Colors.teal,
+          fontFamily: 'Sono',
         ),
         initialRoute: '/splashview',
         routes: {
