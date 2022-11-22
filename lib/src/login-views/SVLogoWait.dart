@@ -1,12 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-
+import 'package:hola_flutter/src/singleton/DataHolder.dart';
 import '../fb_data/FBAdmin.dart';
 
 class SVLogoWait extends StatefulWidget{
+  final String sLogoPath;
+
+  const SVLogoWait(this.sLogoPath, {super.key});
+
 
   @override
   State<StatefulWidget> createState() {
@@ -23,7 +24,7 @@ class _SVLogoWaitState extends State<SVLogoWait> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    //FirebaseAuth.instance.signOut();
+   FirebaseAuth.instance.signOut();
     loadAllData();
   }
 
@@ -31,7 +32,7 @@ class _SVLogoWaitState extends State<SVLogoWait> {
 
   void loadAllData() async{
     //Función en la que vamos a cargar todos los recursos necesarios (aunque hay cosas que se cargan antes)
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
 
     if(FirebaseAuth.instance.currentUser == null){
 
@@ -66,21 +67,26 @@ class _SVLogoWaitState extends State<SVLogoWait> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+    DataHolder().platformAdmin.initDisplayData(context);
+    print("DEBUG: LA PLATAFORMA TIENE UNA ALTURA ${DataHolder().platformAdmin.dSCREEN_HEIGHT}");
+
+    //Esto solo funciona dentro de un material app
+
     return Scaffold(
         body: Center(
         child: Column (
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             mainAxisSize: MainAxisSize.max,
-            children:  const [
-              Image(image: AssetImage("assets/images/logoP.jpg"), width: 250, height: 200, ),
-              Text("Respira...",
+            children: [
+              Image(image: AssetImage(widget.sLogoPath), width: 250, height: 200, ),
+              const Text("Respire...",
               style: TextStyle(
                   color: Colors.blueGrey,
                   fontSize: 23,
                   fontStyle: FontStyle.italic,
                   fontWeight: FontWeight.bold)
               ),
-              CircularProgressIndicator(
+              const CircularProgressIndicator(
                 color: Colors.teal,
               ),
             ]

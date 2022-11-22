@@ -23,6 +23,7 @@ class App extends StatelessWidget{
 
 
     //DataHolder().dSCREEN_WIDTH= MediaQuery.of(context).size.width;
+   // DataHolder().initPlatformAdmin(context);
     MaterialApp materialAppMobile=const MaterialApp();
     //DataHolder().platformAdmin.initDisplayData(context);
     if(DataHolder().platformAdmin.isAndroidPlatform() ||
@@ -34,12 +35,12 @@ class App extends StatelessWidget{
         ),
         initialRoute: '/splashview',
         routes: {
-          '/loginview':(context) => LoginView(),
+          '/loginview':(context) => const LoginView(),
           '/registerview':(context) => RegisterView(),
-          '/homeview':(context) => HomeView(),
-          '/onboarding':(context) => OnBoardingView(),
-          '/splashview':(context)=> SVLogoWait(),
-          '/chatview':(context)=> ChatView(),
+          '/homeview':(context) => const HomeView(),
+          '/onboarding':(context) => const OnBoardingView(),
+          '/splashview':(context)=> const SVLogoWait("assets/android/images/logo.jpg"),
+          '/chatview':(context)=> const ChatView(),
         },
       );
     }
@@ -49,19 +50,18 @@ class App extends StatelessWidget{
         theme: ThemeData(
             primarySwatch: Colors.deepOrange
         ),
-        initialRoute: '/homeview',
+        initialRoute: '/splashview',
         routes: {
-          '/loginview':(context) => LoginView(),
+          '/loginview':(context) => const LoginView(),
           '/registerview':(context) => RegisterView(),
-          '/homeview':(context) => HomeView(),
-          '/onboarding':(context) => OnBoardingView(),
-          '/splashview':(context)=> SVLogoWait(),
-          '/chatview':(context)=> ChatView(),
+          '/homeview':(context) => const HomeView(),
+          '/onboarding':(context) => const OnBoardingView(),
+          '/splashview':(context)=> const SVLogoWait("assets/web/images/logo.jpg"),
+          '/chatview':(context)=> const ChatView(),
         },
       );
     }
 
-  //print("DEBUG: LA PLATAFORMA TIENE UNA ALTURA" + DataHolder().platformAdmin.dSCREEN_HEIGHT.toString());
 
     return materialAppMobile;
   }

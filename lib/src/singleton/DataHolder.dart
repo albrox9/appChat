@@ -29,7 +29,7 @@ class DataHolder{
 
   late PlatformAdmin platformAdmin;
 
-  void initPlatforminDisplaySetting(BuildContext context){
+  void initPlatformAdminDisplaySetting(BuildContext context){
     
     platformAdmin.initDisplayData(context);
 
@@ -41,6 +41,10 @@ class DataHolder{
     platformAdmin = PlatformAdmin();
 
   }
+
+  /*void initPlatformAdmin(BuildContext context){
+    platformAdmin = PlatformAdmin(context);
+  }*/
 
   factory DataHolder(){
     return _dataHolder;
