@@ -1,11 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hola_flutter/src/singleton/DataHolder.dart';
 
-class AdminView  extends StatelessWidget{
-
-  const AdminView({super.key});
-
+class AdminWebView extends StatelessWidget {
+  const AdminWebView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +20,7 @@ class AdminView  extends StatelessWidget{
         SizedBox(
           width: 18,
           child: Container(
-            child: const Text("Hola esta pagina es de prueba"),
+            child: const Text('Esto es una clase de prueba para web'),
           ),
         ),
       ],
