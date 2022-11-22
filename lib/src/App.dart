@@ -15,11 +15,12 @@ import 'login-views/SVLogoWait.dart';
 
 class App extends StatelessWidget{
 
-  App({Key? key}) : super(key:key);
+  const App({Key? key}) : super(key:key);
 
 
   @override
   Widget build(BuildContext context) {
+
 
     //DataHolder().dSCREEN_WIDTH= MediaQuery.of(context).size.width;
     MaterialApp materialAppMobile=const MaterialApp();
@@ -28,7 +29,10 @@ class App extends StatelessWidget{
         DataHolder().platformAdmin.isIOSPlatform()){
 
       materialAppMobile=MaterialApp(
-        initialRoute: '/Splash',
+        theme: ThemeData(
+          primarySwatch: Colors.teal
+        ),
+        initialRoute: '/splashview',
         routes: {
           '/loginview':(context) => LoginView(),
           '/registerview':(context) => RegisterView(),
@@ -40,8 +44,12 @@ class App extends StatelessWidget{
       );
     }
     else if(DataHolder().platformAdmin.isWebPlatform()){
+
       materialAppMobile=MaterialApp(
-        initialRoute: '/Home',
+        theme: ThemeData(
+            primarySwatch: Colors.deepOrange
+        ),
+        initialRoute: '/homeview',
         routes: {
           '/loginview':(context) => LoginView(),
           '/registerview':(context) => RegisterView(),
@@ -53,7 +61,7 @@ class App extends StatelessWidget{
       );
     }
 
-
+  //print("DEBUG: LA PLATAFORMA TIENE UNA ALTURA" + DataHolder().platformAdmin.dSCREEN_HEIGHT.toString());
 
     return materialAppMobile;
   }

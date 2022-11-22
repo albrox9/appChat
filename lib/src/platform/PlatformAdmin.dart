@@ -13,6 +13,12 @@ class PlatformAdmin{
 
   PlatformAdmin();
 
+  void initDisplayData(BuildContext context){
+    this.context = context;
+    dSCREEN_HEIGHT = MediaQuery.of(context).size.height;
+    dSCREEN_WIDTH = MediaQuery.of(context).size.width;
+  }
+
 
   double getScreenWidth(BuildContext context){
     dSCREEN_WIDTH=MediaQuery.of(context).size.width;

@@ -29,10 +29,17 @@ class DataHolder{
 
   late PlatformAdmin platformAdmin;
 
+  void initPlatforminDisplaySetting(BuildContext context){
+    
+    platformAdmin.initDisplayData(context);
+
+  }
+
   DataHolder._internal(){
 
     sMensaje = "Lorem ipsum";
     platformAdmin = PlatformAdmin();
+
   }
 
   factory DataHolder(){
